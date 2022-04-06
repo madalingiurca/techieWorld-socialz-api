@@ -1,4 +1,4 @@
-package tech.madalingiurca.techieworldsocialz.models;
+package tech.madalingiurca.techieworldsocialz.database.models;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

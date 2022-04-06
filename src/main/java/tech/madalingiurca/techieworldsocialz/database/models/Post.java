@@ -1,10 +1,11 @@
-package tech.madalingiurca.techieworldsocialz.models;
+package tech.madalingiurca.techieworldsocialz.database.models;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
 import javax.persistence.*;
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,10 +21,13 @@ public class Post {
 
     private String content;
 
+    private ZonedDateTime creationDate;
+
     @OneToMany(mappedBy = "post", cascade = {CascadeType.REMOVE}, orphanRemoval = true)
     private List<Comment> comments = new ArrayList<>();
 
     public Post(String content) {
+        this.creationDate = ZonedDateTime.now();
         this.content = content;
     }
 

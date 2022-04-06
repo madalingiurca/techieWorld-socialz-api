@@ -1,0 +1,11 @@
+spring:
+  devtools:
+    add-properties: false
+  jpa:
+    hibernate:
+      ddl-auto: create
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+  datasource:
+    url: "jdbc:postgresql://"
+    username: azureuser
+    password: azurepass
