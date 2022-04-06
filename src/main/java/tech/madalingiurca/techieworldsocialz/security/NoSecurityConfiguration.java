@@ -1,5 +1,6 @@
 package tech.madalingiurca.techieworldsocialz.security;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
@@ -15,10 +16,12 @@ import java.util.List;
 @Configuration
 @EnableWebSecurity
 @Profile("dev")
+@Slf4j
 public class NoSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
+        log.error("Security configured for DEV environment! Please use the correct profile. Ignore this for test environment.");
         httpSecurity.authorizeRequests().antMatchers("/").permitAll();
         httpSecurity.cors().and().csrf().disable();
         httpSecurity.headers().frameOptions().disable();
