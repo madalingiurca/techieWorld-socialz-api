@@ -7,11 +7,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import tech.madalingiurca.techieworldsocialz.database.models.Post;
 import tech.madalingiurca.techieworldsocialz.service.PostManagementService;
+import tech.madalingiurca.techieworldsocialz.web.model.PostDTO;
 import tech.madalingiurca.techieworldsocialz.web.model.request.CreatePostRequest;
+import tech.madalingiurca.techieworldsocialz.web.model.response.PostsRetrieveResponse;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
@@ -23,12 +25,24 @@ public class PostController {
     private final PostManagementService postManagementService;
 
     @GetMapping(produces = APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<Post>> retrievePosts() {
-        return ResponseEntity.ok(postManagementService.getPosts());
+    public ResponseEntity<PostsRetrieveResponse> retrievePosts() {
+
+        List<PostDTO> posts = postManagementService.getPosts().stream()
+                .map(PostDTO::new)
+                .collect(Collectors.toList());
+
+        return ResponseEntity
+                .ok()
+                .header("Response-Posts-Count", String.valueOf(posts.size()))
+                .body(new PostsRetrieveResponse(posts));
     }
 
     @PostMapping("/new")
-    public ResponseEntity<Post> createNewPost(@RequestBody CreatePostRequest createPostRequest) {
-        return ResponseEntity.accepted().body(postManagementService.createPost(createPostRequest.getContent()));
+    public ResponseEntity<PostDTO> createNewPost(@RequestBody CreatePostRequest createPostRequest) {
+        PostDTO postDTO = new PostDTO(postManagementService.createPost(createPostRequest.getContent()));
+
+        return ResponseEntity
+                .accepted()
+                .body(postDTO);
     }
 }
