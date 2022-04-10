@@ -19,7 +19,6 @@ public class Comment {
     private String content;
 
     @ManyToOne
-    @JoinColumn(name = "post_id")
     private Post post;
 
     public Comment(String content, Post post) {

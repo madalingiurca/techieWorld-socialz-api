@@ -13,6 +13,7 @@ import java.util.List;
 @NoArgsConstructor
 @Getter
 @Accessors(fluent = true)
+@Table(name = "posts")
 public class Post {
 
     @Id
@@ -23,7 +24,7 @@ public class Post {
 
     private ZonedDateTime creationDate;
 
-    @OneToMany(mappedBy = "post", cascade = {CascadeType.REMOVE}, orphanRemoval = true)
+    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
     private List<Comment> comments = new ArrayList<>();
 
     public Post(String content) {
@@ -36,8 +37,8 @@ public class Post {
         this.comments = comments;
     }
 
-    public Post addComment(Comment comment) {
-        this.comments.add(comment);
+    public Post addComment(String content) {
+        this.comments.add(new Comment(content, this));
         return this;
     }
 }
