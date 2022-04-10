@@ -12,7 +12,9 @@
     <artifactId>techieWorld-socialz</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>techieWorld-socialz</name>
+    <packaging>jar</packaging>
     <description>techieWorld-socialz</description>
+
     <properties>
         <java.version>11</java.version>
     </properties>
