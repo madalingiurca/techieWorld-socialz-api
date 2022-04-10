@@ -66,8 +66,8 @@ jobs:
           envs: JAR_FILE_NAME,APP_NAME
           script: |
             sudo /etc/init.d/${APP_NAME} stop
-            mv ~/techieWorld-socialz-app/${APP_NAME}.jar ~/techieWorld-socialz-app/$JAR_FILE_NAME-old.jar
-            mv ~/techieWorld-socialz-app/$JAR_FILE_NAME.jar ~/techieWorld-socialz-app/${APP_NAME}.jar
+            mv ~/techieWorld-socialz-app/${APP_NAME}.jar ~/techieWorld-socialz-app/${JAR_FILE_NAME}-old.jar
+            mv ~/techieWorld-socialz-app/${JAR_FILE_NAME}.jar ~/techieWorld-socialz-app/${APP_NAME}.jar
             sudo rm -rf /etc/init.d/${APP_NAME}
-            sudo ln -s -f ~/techieWorld-socialz-app/$JAR_FILE_NAME.jar /etc/init.d/${APP_NAME}
+            sudo ln -s -f ~/techieWorld-socialz-app/${APP_NAME}.jar /etc/init.d/${APP_NAME}
             sudo /etc/init.d/${APP_NAME} start
