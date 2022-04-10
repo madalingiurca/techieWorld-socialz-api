@@ -62,8 +62,10 @@ jobs:
           username: ${{ secrets.SERVER_USERNAME }}
           key: ${{ secrets.SERVER_SSH_KEY }}
           port: 22
+          debug: true
+          envs: JAR_FILE_NAME,APP_NAME
           script: |
-            sudo /etc/init.d/${APP_NAME}ac stop
+            sudo /etc/init.d/${APP_NAME} stop
             mv ~/source/${APP_NAME}.jar ~/source/$JAR_FILE_NAME-old.jar
             mv ~/source/$JAR_FILE_NAME.jar ~/source/${APP_NAME}.jar
             sudo rm -rf /etc/init.d/${APP_NAME}
