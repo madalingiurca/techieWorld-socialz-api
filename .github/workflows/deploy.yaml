@@ -39,8 +39,9 @@ jobs:
           username: ${{ secrets.SERVER_USERNAME }}
           key: ${{ secrets.SERVER_SSH_KEY }}
           port: 22
-          source: "techieWorld-socialz-0.0.1-SNAPSHOT.jar"
+          source: "target/techieWorld-socialz-0.0.1-SNAPSHOT.jar"
           target: "~/source"
+          debug: true
 
       - name: Start Service
         uses: appleboy/ssh-action@master
