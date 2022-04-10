@@ -15,7 +15,7 @@ import java.util.List;
 
 @Configuration
 @EnableWebSecurity
-@Profile("dev")
+@Profile("zeroSecurity")
 @Slf4j
 public class NoSecurityConfiguration extends WebSecurityConfigurerAdapter {
 

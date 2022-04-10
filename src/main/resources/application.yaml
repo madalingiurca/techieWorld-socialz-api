@@ -6,6 +6,6 @@ spring:
       ddl-auto: create
     database-platform: org.hibernate.dialect.PostgreSQLDialect
   datasource:
-    url: "jdbc:postgresql://"
-    username: azureuser
-    password: azurepass
+    url: "jdbc:postgresql://localhost:5432/techieSocialz"
+    username: madalingiurca
+    password: dummy
