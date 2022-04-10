@@ -8,8 +8,9 @@ on:
     branches: [ master, mvp1 ]
 
 env:
+  SCP_SOURCE_PATH: target/techieWorld-socialz-0.0.1-SNAPSHOT.jar
   JAR_FILE_NAME: techieWorld-socialz-0.0.1-SNAPSHOT
-  APP_NAME: "TechieWorld-Socialz"
+  APP_NAME: TechieWorld-Socialz
 
 jobs:
   build:
@@ -37,7 +38,7 @@ jobs:
         run: tree -L 5
 
       - name: Debug logs
-        run: echo "{{ env.JAR_FILE_NAME }}"
+        run: echo "$JAR_FILE_NAME"
 
       - name: Upload application
         uses: appleboy/scp-action@master
@@ -46,22 +47,25 @@ jobs:
           username: ${{ secrets.SERVER_USERNAME }}
           key: ${{ secrets.SERVER_SSH_KEY }}
           port: 22
-          source: "target/{{ env.JAR_FILE_NAME }}.jar"
+          source: ${{ env.SCP_SOURCE_PATH }}
           target: "~/techieWorld-socialz-app/"
           strip_components: 1
           debug: true
 
       - name: Start Service
         uses: appleboy/ssh-action@master
+        env:
+          JAR_FILE_NAME: ${{ env.JAR_FILE_NAME }}
+          APP_NAME: ${{ env.APP_NAME }}
         with:
           host: ${{ secrets.SERVER_IP_ADDRESS }}
           username: ${{ secrets.SERVER_USERNAME }}
           key: ${{ secrets.SERVER_SSH_KEY }}
           port: 22
           script: |
-            sudo /etc/init.d/{{ env.APP_NAME }} stop
-            mv ~/source/{{ env.APP_NAME }}.jar ~/source/{{ env.JAR_FILE_NAME }}-old.jar
-            mv ~/source/{{ env.JAR_FILE_NAME }}.jar ~/source/{{ env.APP_NAME }}.jar
-            sudo rm -rf /etc/init.d/{{ env.APP_NAME }}
-            sudo ln -s -f ~/source/{{ env.JAR_FILE_NAME }}.jar /etc/init.d/{{ env.APP_NAME }}
-            sudo /etc/init.d/{{ env.APP_NAME }} start
+            sudo /etc/init.d/${APP_NAME}ac stop
+            mv ~/source/${APP_NAME}.jar ~/source/$JAR_FILE_NAME-old.jar
+            mv ~/source/$JAR_FILE_NAME.jar ~/source/${APP_NAME}.jar
+            sudo rm -rf /etc/init.d/${APP_NAME}
+            sudo ln -s -f ~/source/$JAR_FILE_NAME.jar /etc/init.d/${APP_NAME}
+            sudo /etc/init.d/${APP_NAME} start
