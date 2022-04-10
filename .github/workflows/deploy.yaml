@@ -7,6 +7,10 @@ on:
   push:
     branches: [ master, mvp1 ]
 
+env:
+  JAR_FILE_NAME: techieWorld-socialz-0.0.1-SNAPSHOT.jar
+  APP_NAME: "TechieWorld-Socialz"
+
 jobs:
   build:
 
@@ -39,22 +43,21 @@ jobs:
           username: ${{ secrets.SERVER_USERNAME }}
           key: ${{ secrets.SERVER_SSH_KEY }}
           port: 22
-          source: "target/techieWorld-socialz-0.0.1-SNAPSHOT.jar"
-          target: "~/source"
-          debug: true
+          source: "target/{{ env.JAR_FILE_NAME }}"
+          target: "~/techieWorld-socialz-app/"
+          strip_components: 1
 
       - name: Start Service
         uses: appleboy/ssh-action@master
         with:
-          host: ${{ secrets.API_IP_ADDRESS }}
-          username: ${{ secrets.API_USERNAME }}
-          key: ${{ secrets.AWS_SSH_KEY }}
+          host: ${{ secrets.SERVER_IP_ADDRESS }}
+          username: ${{ secrets.SERVER_USERNAME }}
+          key: ${{ secrets.SERVER_SSH_KEY }}
           port: 22
           script: |
-            sudo /etc/init.d/my-app stop
-            mv ~/source/my-app.jar ~/source/my-app-old.jar
-            mv ~/source/my-app-latest.jar ~/source/my-app.jar
-            sudo rm -rf /etc/init.d/my-app
-            sudo ln -s -f ~/source/my-app.jar /etc/init.d/my-app
-            sudo /etc/init.d/my-app start
-            rm ~/source/my-app-old.jar
+            sudo /etc/init.d/{{ env.APP_NAME }} stop
+            mv ~/source/{{ env.APP_NAME }}.jar ~/source/{{ env.JAR_FILE_NAME }}-old.jar
+            mv ~/source/{{ env.JAR_FILE_NAME }}.jar ~/source/{{ env.APP_NAME }}.jar
+            sudo rm -rf /etc/init.d/{{ env.APP_NAME }}
+            sudo ln -s -f ~/source/{{ env.JAR_FILE_NAME }}.jar /etc/init.d/{{ env.APP_NAME }}
+            sudo /etc/init.d/{{ env.APP_NAME }} start
