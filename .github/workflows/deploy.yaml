@@ -49,7 +49,7 @@ jobs:
           source: "target/{{ env.JAR_FILE_NAME }}.jar"
           target: "~/techieWorld-socialz-app/"
           strip_components: 1
-          debug:true
+          debug: true
 
       - name: Start Service
         uses: appleboy/ssh-action@master
