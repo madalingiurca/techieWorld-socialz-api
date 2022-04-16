@@ -2,7 +2,7 @@ package tech.madalingiurca.techieworldsocialz.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import tech.madalingiurca.techieworldsocialz.database.models.Post;
+import tech.madalingiurca.techieworldsocialz.database.entity.Post;
 import tech.madalingiurca.techieworldsocialz.database.repository.PostRepository;
 
 @RequiredArgsConstructor

@@ -1,7 +1,7 @@
 package tech.madalingiurca.techieworldsocialz.web.model;
 
 import lombok.Getter;
-import tech.madalingiurca.techieworldsocialz.database.models.Comment;
+import tech.madalingiurca.techieworldsocialz.database.entity.Comment;
 
 @Getter
 public class CommentDTO {

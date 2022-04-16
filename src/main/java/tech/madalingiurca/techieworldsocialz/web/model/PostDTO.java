@@ -2,7 +2,7 @@ package tech.madalingiurca.techieworldsocialz.web.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
-import tech.madalingiurca.techieworldsocialz.database.models.Post;
+import tech.madalingiurca.techieworldsocialz.database.entity.Post;
 
 import java.time.ZonedDateTime;
 import java.util.List;
