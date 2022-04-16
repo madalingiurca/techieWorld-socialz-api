@@ -1,6 +1,9 @@
 spring:
   devtools:
     add-properties: false
+  sql:
+    init:
+      platform: psql
   jpa:
     hibernate:
       ddl-auto: create

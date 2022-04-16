@@ -30,4 +30,11 @@ public class JwtTokenUtil {
                 .username(decodedJWT.getClaim(USERNAME_CLAIM).asString())
                 .build();
     }
+
+    public String generateToken(UserDetailsImpl user) {
+        return JWT.create()
+                .withClaim(USERNAME_CLAIM, user.getUsername())
+                .withClaim(USER_ALIAS_CLAIM, user.getAlias())
+                .sign(jwtAlgorithm);
+    }
 }
