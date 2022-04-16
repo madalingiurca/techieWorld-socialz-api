@@ -25,6 +25,7 @@ jobs:
           java-version: '11'
           distribution: 'temurin'
           cache: maven
+
       - uses: actions/cache@v1
         with:
           path: ~/.m2/repository
@@ -32,11 +33,16 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-maven-
 
+      - uses: datamonsters/replace-action
+        with:
+          files: 'src/main/resources/application.yaml'
+          replacements: '$PSQL_PASS=${{ secrets.PSQL_PASSWORD }}'
+
+      - name: validate replace task
+        run: cat src/main/resources/application.yaml
+
       - name: Build with Maven
         run: mvn -B package --file pom.xml -P prod
-
-      - name: Debug logs
-        run: tree -L 5
 
       - name: Upload application
         uses: appleboy/scp-action@master
