@@ -16,3 +16,6 @@ spring:
 logging:
   level:
     web: debug
+security:
+  jwt:
+    secret: my_very_secret_word_for_jwt_generation
