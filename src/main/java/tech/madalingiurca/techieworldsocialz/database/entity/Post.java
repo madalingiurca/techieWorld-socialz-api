@@ -35,8 +35,8 @@ public class Post {
         this.content = content;
     }
 
-    public Post addComment(String content) {
-        this.comments.add(new Comment(content, this));
+    public Post addComment(String author, String content) {
+        this.comments.add(new Comment(author, content, this));
         return this;
     }
 }

@@ -16,12 +16,15 @@ public class Comment {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    private String author;
+
     private String content;
 
     @ManyToOne
     private Post post;
 
-    public Comment(String content, Post post) {
+    public Comment(String author, String content, Post post) {
+        this.author = author;
         this.content = content;
         this.post = post;
     }

@@ -55,8 +55,9 @@ public class PostController {
     }
 
     @PostMapping("/comment")
-    public ResponseEntity<GenericOneItemResponse<Long>> addNewComment(@RequestBody AddCommentRequest request) {
-        Long postId = commentManagementService.addComment(request.getPostId(), request.getContent());
+    public ResponseEntity<GenericOneItemResponse<Long>> addNewComment(@RequestBody AddCommentRequest request,
+                                                                      @AuthenticationPrincipal UserDetailsImpl userDetails) {
+        Long postId = commentManagementService.addComment(request.getPostId(), userDetails.getAlias(), request.getContent());
         GenericOneItemResponse<Long> response = new GenericOneItemResponse<>("postId", postId);
 
         return ResponseEntity

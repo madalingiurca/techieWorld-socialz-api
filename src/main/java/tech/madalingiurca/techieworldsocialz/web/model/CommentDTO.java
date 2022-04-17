@@ -8,10 +8,13 @@ public class CommentDTO {
 
     private final Long id;
 
+    private final String author;
+
     private final String content;
 
     public CommentDTO(Comment comment) {
         this.id = comment.id();
+        this.author = comment.author();
         this.content = comment.content();
     }
 }

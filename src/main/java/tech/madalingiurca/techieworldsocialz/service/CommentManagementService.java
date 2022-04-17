@@ -12,10 +12,10 @@ public class CommentManagementService {
 
     private final PostRepository postRepository;
 
-    public Long addComment(Long postId, String content) {
+    public Long addComment(Long postId, String author, String content) {
         Post post = postRepository
                 .findById(postId)
                 .orElseThrow(PostNotFoundException::new);
-        return postRepository.save(post.addComment(content)).id();
+        return postRepository.save(post.addComment(author, content)).id();
     }
 }
