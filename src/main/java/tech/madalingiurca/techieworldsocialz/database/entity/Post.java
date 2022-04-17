@@ -20,21 +20,19 @@ public class Post {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    private String author;
+
     private String content;
 
     private ZonedDateTime creationDate;
 
     @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
-    private List<Comment> comments = new ArrayList<>();
+    private final List<Comment> comments = new ArrayList<>();
 
-    public Post(String content) {
+    public Post(String author, String content) {
         this.creationDate = ZonedDateTime.now();
+        this.author = author;
         this.content = content;
-    }
-
-    public Post(String content, List<Comment> comments) {
-        this.content = content;
-        this.comments = comments;
     }
 
     public Post addComment(String content) {

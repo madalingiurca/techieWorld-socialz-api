@@ -14,6 +14,8 @@ public class PostDTO {
 
     private final Long id;
 
+    private final String author;
+
     private final String content;
 
     private final ZonedDateTime creationDate;
@@ -24,6 +26,7 @@ public class PostDTO {
         this.id = postEntity.id();
         this.content = postEntity.content();
         this.creationDate = postEntity.creationDate();
+        this.author = postEntity.author();
         this.comments = postEntity.comments().stream()
                 .map(CommentDTO::new)
                 .collect(Collectors.toList());

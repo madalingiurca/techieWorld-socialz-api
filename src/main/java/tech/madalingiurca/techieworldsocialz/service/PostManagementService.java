@@ -18,7 +18,7 @@ public class PostManagementService {
         return new ArrayList<>(postRepository.findAll());
     }
 
-    public Post createPost(String content) {
-        return postRepository.save(new Post(content));
+    public Post createPost(String author, String content) {
+        return postRepository.save(new Post(author, content));
     }
 }

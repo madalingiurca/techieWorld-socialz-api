@@ -2,11 +2,13 @@ package tech.madalingiurca.techieworldsocialz.web.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import tech.madalingiurca.techieworldsocialz.security.UserDetailsImpl;
 import tech.madalingiurca.techieworldsocialz.service.CommentManagementService;
 import tech.madalingiurca.techieworldsocialz.service.PostManagementService;
 import tech.madalingiurca.techieworldsocialz.web.model.PostDTO;
@@ -43,8 +45,9 @@ public class PostController {
     }
 
     @PostMapping("/new")
-    public ResponseEntity<PostDTO> createNewPost(@RequestBody CreatePostRequest createPostRequest) {
-        PostDTO postDTO = new PostDTO(postManagementService.createPost(createPostRequest.getContent()));
+    public ResponseEntity<PostDTO> createNewPost(@RequestBody CreatePostRequest createPostRequest,
+                                                 @AuthenticationPrincipal UserDetailsImpl userDetails) {
+        PostDTO postDTO = new PostDTO(postManagementService.createPost(userDetails.getAlias(), createPostRequest.getContent()));
 
         return ResponseEntity
                 .accepted()
