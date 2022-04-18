@@ -15,7 +15,6 @@ import tech.madalingiurca.techieworldsocialz.web.model.PostDTO;
 import tech.madalingiurca.techieworldsocialz.web.model.request.AddCommentRequest;
 import tech.madalingiurca.techieworldsocialz.web.model.request.CreatePostRequest;
 import tech.madalingiurca.techieworldsocialz.web.model.response.GenericOneItemResponse;
-import tech.madalingiurca.techieworldsocialz.web.model.response.PostsRetrieveResponse;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -32,7 +31,7 @@ public class PostController {
     private final CommentManagementService commentManagementService;
 
     @GetMapping(produces = APPLICATION_JSON_VALUE)
-    public ResponseEntity<PostsRetrieveResponse> retrievePosts() {
+    public ResponseEntity<List<PostDTO>> retrievePosts() {
 
         List<PostDTO> posts = postManagementService.getPosts().stream()
                 .map(PostDTO::new)
@@ -41,7 +40,7 @@ public class PostController {
         return ResponseEntity
                 .ok()
                 .header("Response-Posts-Count", String.valueOf(posts.size()))
-                .body(new PostsRetrieveResponse(posts));
+                .body(posts);
     }
 
     @PostMapping("/new")
