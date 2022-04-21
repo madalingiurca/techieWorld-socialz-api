@@ -16,6 +16,7 @@ import tech.madalingiurca.techieworldsocialz.web.model.request.AddCommentRequest
 import tech.madalingiurca.techieworldsocialz.web.model.request.CreatePostRequest;
 import tech.madalingiurca.techieworldsocialz.web.model.response.GenericOneItemResponse;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -35,6 +36,7 @@ public class PostController {
 
         List<PostDTO> posts = postManagementService.getPosts().stream()
                 .map(PostDTO::new)
+                .sorted(Comparator.comparing(PostDTO::getCreationDate).reversed())
                 .collect(Collectors.toList());
 
         return ResponseEntity
