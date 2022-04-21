@@ -22,6 +22,7 @@ public class Post {
 
     private String author;
 
+    @Column(columnDefinition = "TEXT")
     private String content;
 
     private ZonedDateTime creationDate;
