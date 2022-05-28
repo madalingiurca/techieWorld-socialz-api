@@ -37,39 +37,7 @@ jobs:
         uses: datamonsters/replace-action@v2
         with:
           files: 'src/main/resources/application.yaml'
-          replacements: '$PSQL_PASS=${{ secrets.PSQL_PASSWORD }},$JWT_SECRET=${{ secrets.JWT_SECRET }}'
+          replacements: '$HEROKU_PSQL_URL=${{ secrets.HEROKU_PSQL_URL }},$PSQL_PASS=${{ secrets.PSQL_PASSWORD }},$PSQL_USERNAME=${{ secrets.$PSQL_USERNAME }},$JWT_SECRET=${{ secrets.JWT_SECRET }}'
 
       - name: Build with Maven
         run: mvn -B package --file pom.xml -P prod
-
-      - name: Upload application
-        uses: appleboy/scp-action@master
-        with:
-          host: ${{ secrets.SERVER_IP_ADDRESS }}
-          username: ${{ secrets.SERVER_USERNAME }}
-          key: ${{ secrets.SERVER_SSH_KEY }}
-          port: 22
-          source: ${{ env.SCP_SOURCE_PATH }}
-          target: "~/techieWorld-socialz-app/"
-          strip_components: 1
-          debug: true
-
-      - name: Start Service
-        uses: appleboy/ssh-action@master
-        env:
-          JAR_FILE_NAME: ${{ env.JAR_FILE_NAME }}
-          APP_NAME: ${{ env.APP_NAME }}
-        with:
-          host: ${{ secrets.SERVER_IP_ADDRESS }}
-          username: ${{ secrets.SERVER_USERNAME }}
-          key: ${{ secrets.SERVER_SSH_KEY }}
-          port: 22
-          debug: true
-          envs: JAR_FILE_NAME,APP_NAME
-          script: |
-            sudo /etc/init.d/${APP_NAME} stop
-            mv ~/techieWorld-socialz-app/${APP_NAME}.jar ~/techieWorld-socialz-app/${JAR_FILE_NAME}-old.jar
-            mv ~/techieWorld-socialz-app/${JAR_FILE_NAME}.jar ~/techieWorld-socialz-app/${APP_NAME}.jar
-            sudo rm -rf /etc/init.d/${APP_NAME}
-            sudo ln -s -f ~/techieWorld-socialz-app/${APP_NAME}.jar /etc/init.d/${APP_NAME}
-            sudo /etc/init.d/${APP_NAME} start

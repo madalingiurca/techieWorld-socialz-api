@@ -9,8 +9,8 @@ spring:
       ddl-auto: update
     database-platform: org.hibernate.dialect.PostgreSQLDialect
   datasource:
-    url: "jdbc:postgresql://localhost:5432/techiesocialz"
-    username: madalingiurca
+    url: "$HEROKU_PSQL_URL"
+    username: $PSQL_USERNAME
     password: $PSQL_PASS
 security:
   jwt:
