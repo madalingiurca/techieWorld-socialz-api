@@ -33,7 +33,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-maven-
 
-      - name: Replace database password
+      - name: Replace application.properties secrets
         uses: datamonsters/replace-action@v2
         with:
           files: 'src/main/resources/application.yaml'
