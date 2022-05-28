@@ -37,7 +37,7 @@ jobs:
         uses: datamonsters/replace-action@v2
         with:
           files: 'src/main/resources/application.yaml'
-          replacements: '$HEROKU_PSQL_URL=${{ secrets.HEROKU_PSQL_URL }},$PSQL_PASS=${{ secrets.PSQL_PASSWORD }},$PSQL_USERNAME=${{ secrets.$PSQL_USERNAME }},$JWT_SECRET=${{ secrets.JWT_SECRET }}'
+          replacements: '$HEROKU_PSQL_URL=${{ secrets.HEROKU_PSQL_URL }},$PSQL_PASS=${{ secrets.PSQL_PASSWORD }},$PSQL_USERNAME=${{ secrets.PSQL_USERNAME }},$JWT_SECRET=${{ secrets.JWT_SECRET }}'
 
       - name: Build with Maven
         run: mvn -B package --file pom.xml -P prod
