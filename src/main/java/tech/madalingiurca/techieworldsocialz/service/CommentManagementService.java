@@ -6,13 +6,15 @@ import tech.madalingiurca.techieworldsocialz.database.entity.Post;
 import tech.madalingiurca.techieworldsocialz.database.repository.PostRepository;
 import tech.madalingiurca.techieworldsocialz.web.exception.PostNotFoundException;
 
+import java.util.UUID;
+
 @RequiredArgsConstructor
 @Service
 public class CommentManagementService {
 
     private final PostRepository postRepository;
 
-    public Long addComment(Long postId, String author, String content) {
+    public UUID addComment(UUID postId, String author, String content) {
         Post post = postRepository
                 .findById(postId)
                 .orElseThrow(PostNotFoundException::new);

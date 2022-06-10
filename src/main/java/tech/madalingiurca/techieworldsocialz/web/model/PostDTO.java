@@ -6,13 +6,14 @@ import tech.madalingiurca.techieworldsocialz.database.entity.Post;
 
 import java.time.ZonedDateTime;
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Getter
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class PostDTO {
 
-    private final Long id;
+    private final UUID id;
 
     private final String author;
 

@@ -3,11 +3,13 @@ package tech.madalingiurca.techieworldsocialz.database.entity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Entity
 @NoArgsConstructor
@@ -17,8 +19,9 @@ import java.util.List;
 public class Post {
 
     @Id
+    @Type(type = "org.hibernate.type.UUIDCharType")
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private UUID id;
 
     private String author;
 

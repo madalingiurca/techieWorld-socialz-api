@@ -18,6 +18,7 @@ import tech.madalingiurca.techieworldsocialz.web.model.response.GenericOneItemRe
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
@@ -56,10 +57,10 @@ public class PostController {
     }
 
     @PostMapping("/comment")
-    public ResponseEntity<GenericOneItemResponse<Long>> addNewComment(@RequestBody AddCommentRequest request,
+    public ResponseEntity<GenericOneItemResponse<UUID>> addNewComment(@RequestBody AddCommentRequest request,
                                                                       @AuthenticationPrincipal UserDetailsImpl userDetails) {
-        Long postId = commentManagementService.addComment(request.getPostId(), userDetails.getAlias(), request.getContent());
-        GenericOneItemResponse<Long> response = new GenericOneItemResponse<>("postId", postId);
+        UUID postId = commentManagementService.addComment(request.getPostId(), userDetails.getAlias(), request.getContent());
+        GenericOneItemResponse<UUID> response = new GenericOneItemResponse<>("postId", postId);
 
         return ResponseEntity
                 .accepted()
