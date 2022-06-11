@@ -4,10 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import tech.madalingiurca.techieworldsocialz.security.UserDetailsImpl;
 import tech.madalingiurca.techieworldsocialz.service.CommentManagementService;
 import tech.madalingiurca.techieworldsocialz.service.PostManagementService;
@@ -64,5 +61,14 @@ public class PostController {
         return ResponseEntity
                 .accepted()
                 .body(response);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deletePost(@PathVariable("id") long id) {
+        postManagementService.delete(id);
+
+        return ResponseEntity
+                .accepted()
+                .build();
     }
 }
