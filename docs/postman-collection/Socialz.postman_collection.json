@@ -1,0 +1,682 @@
+{
+  "info": {
+    "_postman_id": "34015220-0093-4d70-b795-99aff33c9008",
+    "name": "Socialz",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "13777006"
+  },
+  "item": [
+    {
+      "name": "Prod",
+      "item": [
+        {
+          "name": "Authorized endpoints",
+          "item": [
+            {
+              "name": "Comment on post",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"postId\": \"1\",\n    \"content\": \"First comment!!!\"\n}"
+                },
+                "url": {
+                  "raw": "http://{{REMOTE_HOST}}:8080/posts/comment",
+                  "protocol": "http",
+                  "host": [
+                    "{{REMOTE_HOST}}"
+                  ],
+                  "port": "8080",
+                  "path": [
+                    "posts",
+                    "comment"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Retrieve posts",
+              "protocolProfileBehavior": {
+                "disabledSystemHeaders": {
+                  "accept": true,
+                  "connection": true,
+                  "accept-encoding": true,
+                  "user-agent": true
+                }
+              },
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "https://{{REMOTE_HOST}}/posts",
+                  "protocol": "https",
+                  "host": [
+                    "{{REMOTE_HOST}}"
+                  ],
+                  "path": [
+                    "posts"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Create post",
+              "event": [
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "exec": [
+                      ""
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\"content\": \"Cras lectus eros, luctus id commodo non, posuere et leo. Pellentesque pulvinar varius rutrum. Aliquam nec venenatis mauris, at cursus felis. Praesent velit diam, cursus at lacinia ut, maximus ac neque. Pellentesque pretium turpis sem, sit amet congued   d\"}"
+                },
+                "url": {
+                  "raw": "https://{{REMOTE_HOST}}/posts/new",
+                  "protocol": "https",
+                  "host": [
+                    "{{REMOTE_HOST}}"
+                  ],
+                  "path": [
+                    "posts",
+                    "new"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ],
+          "auth": {
+            "type": "bearer",
+            "bearer": [
+              {
+                "key": "token",
+                "value": "{{ACCESS_TOKEN}}",
+                "type": "string"
+              }
+            ]
+          },
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  ""
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  ""
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Public endpoints",
+          "item": [
+            {
+              "name": "Login",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "if (pm.response.code == 202) {",
+                      "    let header = pm.response.headers.get(\"AUTHORIZATION\")",
+                      "    console.log(\"token = \" + header)",
+                      "",
+                      "    pm.collectionVariables.set(\"ACCESS_TOKEN\", header.split(\" \")[1]);    ",
+                      "} else {",
+                      "    console.log(\"Login unsuccessful.\");",
+                      "    console.log(pm.response);",
+                      "}",
+                      ""
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9"
+                  },
+                  {
+                    "key": "Accept-Language",
+                    "value": "ro-RO,ro;q=0.9,en-US;q=0.8,en;q=0.7,es;q=0.6,pt;q=0.5,fr;q=0.4,de;q=0.3,la;q=0.2"
+                  },
+                  {
+                    "key": "Cache-Control",
+                    "value": "max-age=0"
+                  },
+                  {
+                    "key": "Connection",
+                    "value": "keep-alive"
+                  },
+                  {
+                    "key": "Cookie",
+                    "value": "JSESSIONID=56D5A37B2E204990B40334B4197326C2"
+                  },
+                  {
+                    "key": "Origin",
+                    "value": "http://20.229.185.66:8080"
+                  },
+                  {
+                    "key": "Referer",
+                    "value": "http://20.229.185.66:8080/login"
+                  },
+                  {
+                    "key": "Upgrade-Insecure-Requests",
+                    "value": "1"
+                  },
+                  {
+                    "key": "User-Agent",
+                    "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.75 Safari/537.36"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"username\": \"{{PROD_USER}}\",\n    \"password\": \"{{PROD_PASS}}\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "https://{{REMOTE_HOST}}/login",
+                  "protocol": "https",
+                  "host": [
+                    "{{REMOTE_HOST}}"
+                  ],
+                  "path": [
+                    "login"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Health Check",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "if (pm.response.code == 202) {",
+                      "    let header = pm.response.headers.get(\"AUTHORIZATION\")",
+                      "    console.log(\"token = \" + header)",
+                      "",
+                      "    pm.collectionVariables.set(\"ACCESS_TOKEN\", header.split(\" \")[1]);    ",
+                      "} else {",
+                      "    console.log(\"Login unsuccessful.\");",
+                      "    console.log(pm.response);",
+                      "}",
+                      ""
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9"
+                  },
+                  {
+                    "key": "Accept-Language",
+                    "value": "ro-RO,ro;q=0.9,en-US;q=0.8,en;q=0.7,es;q=0.6,pt;q=0.5,fr;q=0.4,de;q=0.3,la;q=0.2"
+                  },
+                  {
+                    "key": "Cache-Control",
+                    "value": "max-age=0"
+                  },
+                  {
+                    "key": "Connection",
+                    "value": "keep-alive"
+                  },
+                  {
+                    "key": "Cookie",
+                    "value": "JSESSIONID=56D5A37B2E204990B40334B4197326C2"
+                  },
+                  {
+                    "key": "Origin",
+                    "value": "http://20.229.185.66:8080"
+                  },
+                  {
+                    "key": "Referer",
+                    "value": "http://20.229.185.66:8080/login"
+                  },
+                  {
+                    "key": "Upgrade-Insecure-Requests",
+                    "value": "1"
+                  },
+                  {
+                    "key": "User-Agent",
+                    "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.75 Safari/537.36"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"username\": \"user\",\n    \"password\": \"pass\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "https://{{REMOTE_HOST}}/health",
+                  "protocol": "https",
+                  "host": [
+                    "{{REMOTE_HOST}}"
+                  ],
+                  "path": [
+                    "health"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ],
+          "auth": {
+            "type": "noauth"
+          },
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  ""
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  ""
+                ]
+              }
+            }
+          ]
+        }
+      ],
+      "auth": {
+        "type": "noauth"
+      },
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              ""
+            ]
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              ""
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Dev",
+      "item": [
+        {
+          "name": "Public endpoints",
+          "item": [
+            {
+              "name": "Login",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "let header = pm.response.headers.get(\"AUTHORIZATION\")",
+                      "console.log(\"token = \" + header)",
+                      "",
+                      "pm.collectionVariables.set(\"ACCESS_TOKEN\", header.split(\" \")[1]);"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"username\": \"user\",\n    \"password\": \"pass\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:8080/login",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8080",
+                  "path": [
+                    "login"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Health Check",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "if (pm.response.code == 202) {",
+                      "    let header = pm.response.headers.get(\"AUTHORIZATION\")",
+                      "    console.log(\"token = \" + header)",
+                      "",
+                      "    pm.collectionVariables.set(\"ACCESS_TOKEN\", header.split(\" \")[1]);    ",
+                      "} else {",
+                      "    console.log(\"Login unsuccessful.\");",
+                      "    console.log(pm.response);",
+                      "}",
+                      ""
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9"
+                  },
+                  {
+                    "key": "Accept-Language",
+                    "value": "ro-RO,ro;q=0.9,en-US;q=0.8,en;q=0.7,es;q=0.6,pt;q=0.5,fr;q=0.4,de;q=0.3,la;q=0.2"
+                  },
+                  {
+                    "key": "Cache-Control",
+                    "value": "max-age=0"
+                  },
+                  {
+                    "key": "Connection",
+                    "value": "keep-alive"
+                  },
+                  {
+                    "key": "Cookie",
+                    "value": "JSESSIONID=56D5A37B2E204990B40334B4197326C2"
+                  },
+                  {
+                    "key": "Origin",
+                    "value": "http://20.229.185.66:8080"
+                  },
+                  {
+                    "key": "Referer",
+                    "value": "http://20.229.185.66:8080/login"
+                  },
+                  {
+                    "key": "Upgrade-Insecure-Requests",
+                    "value": "1"
+                  },
+                  {
+                    "key": "User-Agent",
+                    "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.75 Safari/537.36"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"username\": \"user\",\n    \"password\": \"pass\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:8080/health",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8080",
+                  "path": [
+                    "health"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Authenticated Endpoints",
+          "item": [
+            {
+              "name": "Create post",
+              "event": [
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "exec": [
+                      ""
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\"content\": \"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce diam metus, pretium et viverra at, euismod et justo. Nullam condimentum quam nisl\"}"
+                },
+                "url": {
+                  "raw": "http://localhost:8080/posts/new",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8080",
+                  "path": [
+                    "posts",
+                    "new"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Comment on post",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"postId\": \"d66760fa-7bcf-42dc-b5fb-5d2669537182\",\n    \"content\": \"this is my second comment\"\n}"
+                },
+                "url": {
+                  "raw": "http://localhost:8080/posts/comment",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8080",
+                  "path": [
+                    "posts",
+                    "comment"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Retrieve posts",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:8080/posts",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8080",
+                  "path": [
+                    "posts"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ],
+          "auth": {
+            "type": "bearer",
+            "bearer": [
+              {
+                "key": "token",
+                "value": "{{ACCESS_TOKEN}}",
+                "type": "string"
+              }
+            ]
+          },
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  ""
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  ""
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "LOCAL_HOST",
+      "value": "localhost"
+    },
+    {
+      "key": "REMOTE_HOST",
+      "value": "techie-world-socialz.herokuapp.com",
+      "type": "string"
+    },
+    {
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "ACCESS_TOKEN",
+      "value": ""
+    },
+    {
+      "key": "PROD_USER",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "PROD_PASS",
+      "value": "",
+      "type": "string"
+    }
+  ]
+}

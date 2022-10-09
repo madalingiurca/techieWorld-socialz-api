@@ -1,0 +1,21 @@
+spring:
+  sql:
+    init:
+      platform: h2
+  datasource:
+    url: jdbc:h2:mem:testdb
+    username: sa
+    password:
+    driverClassName: org.h2.Driver
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    defer-datasource-initialization: true
+  h2:
+    console:
+      enabled: true
+logging:
+  level:
+    web: debug
+security:
+  jwt:
+    secret: my_very_secret_word_for_jwt_generation
