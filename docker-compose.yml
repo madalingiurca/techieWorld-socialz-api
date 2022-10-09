@@ -1,0 +1,6 @@
+version: "3.9"
+services:
+  techie-world-socialz-api:
+    build: .
+    ports:
+      - "8080:8080"
